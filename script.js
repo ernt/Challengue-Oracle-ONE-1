@@ -25,7 +25,12 @@ var buttonEncrypt = document.querySelector("#btn-encriptar");
 var buttonDesencrypt = document.querySelector("#btn-desencriptar");
 var botonCopy = document.querySelector("#btn-copy");
 
+const removeAccents = (str) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  } 
+
 function encriptar (input) {
+ 
     var encript = input.replace(/e/gi,"enter").replace(/i/gi,"imes").replace(/a/gi,"ai").replace(/u/gi,"ufat").replace(/o/gi,"ober");
     return encript;
 }
@@ -33,17 +38,12 @@ function encriptar (input) {
 
 function desencriptar (input) {
    
-    var encript = input.replace(/enter/gi,"e").replace(/imes/gi,"i").replace(/ai/gi,"a").replace(/ufat/gi,"u").replace(/ober/gi,"o");
+    var desencript = input.replace(/enter/gi,"e").replace(/imes/gi,"i").replace(/ai/gi,"a").replace(/ufat/gi,"u").replace(/ober/gi,"o");
     return desencript;
 }
 
 
 
-function copy(){
-    var copyText = document.querySelector("#msg");
-    copyText.select();
-    document.execCommand("copy");
-}
 
 
 //Capture input
