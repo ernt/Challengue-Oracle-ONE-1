@@ -24,6 +24,7 @@ No se permite acentuación de palabras
 var buttonEncrypt = document.querySelector("#btn-encriptar");
 var buttonDesencrypt = document.querySelector("#btn-desencriptar");
 var botonCopy = document.querySelector("#btn-copy");
+var inputResultado = document.querySelector("#msg");
 
 const removeAccents = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -43,23 +44,30 @@ function desencriptar (input) {
 }
 
 
+function copiarportapapeles(){
+    var copyText = document.getElementById("msg");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); 
+    navigator.clipboard.writeText(copyText.value);
+    document.getElementById("msg").value = "";
+}
 
 
 
-//Capture input
 function captureInput() {
     var input = document.querySelector("#input-texto");
     return input.value;
 }
 
-//Show output
 function output(encryptedString){
-    document.querySelector("#msg").value=encryptedString;
+    inputResultado.value=encryptedString;
 }
 
 
 
 buttonEncrypt.addEventListener("click",function(event) {
+    event.preventDefault();
+
     var input = captureInput();
   var encrypt = encriptar(input);
   output(encrypt);
@@ -67,12 +75,15 @@ buttonEncrypt.addEventListener("click",function(event) {
 });
 
 buttonDesencrypt.addEventListener("click",function(event) {
+    event.preventDefault();
     var input = captureInput();
     var desencrypt= desencriptar(input );
     output(desencrypt);
    });
 
 
-   botonCopy.addEventListener("click",function(event) {
-   copy();
+  botonCopy.addEventListener("click",function(event) {
+    event.preventDefault();
+    copiarportapapeles();
    });
+
